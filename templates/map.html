@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Esta página muestra el mapa con los diferentes puntos
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}
+Map
+{% endblock %}
+
+{% block content %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+
+    <style>
+      #map-canvas {
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+      }
+    </style>
+    <div id="map_canvas"></div>
+{% endblock %}
+
+
+{% block js_include %}
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+   <script type="text/javascript">
+  function leer_json(){
+  $.getJSON("{% url 'points_users' %}", function(json1) {
+          $.each(json1, function(key, data) {
+            var infowindow = new google.maps.InfoWindow;
+            var i = 0;
+            var latLng = new google.maps.LatLng(data.fields.lat, data.fields.lng);
+            // Creating a marker and putting it on the map
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: data.text,
+                icon: '/static/img/reg.png',
+            });
+            marker.setMap(map);
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(data.fields.text + ', escrito por ' + data.fields.user + ', ' + data.fields.date);
+                infowindow.open(map, marker);
+              }
+         })(marker, i));
+          i = i + 1;
+          });
+        });
+    $.getJSON("{% url 'points_twitter' %}", function(json1) {
+          $.each(json1, function(key, data) {
+            var infowindow = new google.maps.InfoWindow;
+            var i = 0;
+            var latLng = new google.maps.LatLng(data.fields.lat, data.fields.lng);
+            // Creating a marker and putting it on the map
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: data.text,
+                icon: '/static/img/twitter.png',
+            });
+            marker.setMap(map);
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              return function() {
+                infowindow.setContent(data.fields.text + ', escrito por ' + data.fields.user + ', ' + data.fields.date);
+                infowindow.open(map, marker);
+              }
+         })(marker, i));
+          i = i + 1;
+          });
+        });
+  }
+   </script>
+   <script type="text/javascript">
+      var map;
+      function initialize()
+      {
+        var mapOptions = {
+          center: new google.maps.LatLng(40.1198087, -6.6124474),
+          zoom: 7,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        setInterval("leer_json();", 3000);
+
+      {% if user.is_authenticated %}
+      // Esta tabla es la del popup de guardar
+
+
+      var infoWindow_2 = new google.maps.InfoWindow();
+
+      var marker;
+
+      google.maps.event.addListener(map, "click", function(event) {
+
+        if (marker != null) {
+          marker.setVisible(false); //Ocultamos el marcador
+          infoWindow_2.close();
+        }
+
+        // Generamos el formulario (atencion a los hidden)
+        var html = "<form id='userpoint_form' action='' method='post'>";
+            html += "{% csrf_token %}";
+            html += "{% spaceless %}{{ form.category|addslashes }}{% endspaceless %}<br />";
+            html += "{{ form.text|addslashes }}<br />";
+            html += "{% spaceless %}{{ form.user.as_hidden|addslashes }}{% endspaceless %}";
+            html += "{{ form.lat.as_hidden|addslashes }}";
+            html += "{{ form.lng.as_hidden|addslashes }}";
+
+            html += "<button class='btn btn-primary' type='submit'>Save</button>";
+            html += "</form>";
+
+        infoWindow_2.setContent(html);
+
+        //draggable nos permite que se pueda arrastrar el marker
+        marker = new google.maps.Marker({
+          position : event.latLng,
+          map : map,
+          draggable: true
+
+        });
+        google.maps.event.addListener(marker, "click", function() {
+          infoWindow_2.open(map, marker);
+        });
+        infoWindow_2.open(map, marker);
+
+        // Establecemos los valores de los campos ocultos
+        $( "input[name='lat']" ).val(event.latLng.lat());
+        $( "input[name='lng']" ).val(event.latLng.lng());
+        $( "input[name='user']" ).val({{user.id}});
+
+
+
+      });
+      {% endif %}
+
+      }
+
+
+
+
+
+      initialize();
+
+    </script>
+
+
+{% endblock %}

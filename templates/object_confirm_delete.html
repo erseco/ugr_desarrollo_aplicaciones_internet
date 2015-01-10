@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Esta página muestra un dialogo de confirmación de borrado
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}{{object_name}} Confirm delete?{% endblock %}
+
+{% block content %}
+<div class="container">
+<h1>{{object_name}}</h1>
+<h3>Are you sure you want to delete {{object}}?</h3>
+<form action="" method="post">{% csrf_token %}
+<input type="submit" value="Yes!"/>  <input type="button" value="No..." onclick="window.history.go(-1);"/>
+</form>
+</div>
+{% endblock %}

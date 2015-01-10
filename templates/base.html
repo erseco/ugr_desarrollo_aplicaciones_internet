@@ -1,0 +1,131 @@
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Pagina base de la que heredarán todas las demás
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}{% endblock %} - Evita Controles</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="shortcut icon" href="/static/favicon.ico" />
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+
+        <script src="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="/static/img/logo_small.png" alt="Evita Controles"></a>
+          <a class="navbar-brand" href="{% url 'home' %}">Evita Controles</a>
+        </div
+        <div id="navbar" class="navbar-collapse collapse">
+
+
+
+          <ul class="nav navbar-nav">
+            <li{% ifequal page 'home' %} class="active"{% endifequal %}><a href="{% url 'home' %}">Home</a></li>
+            <li{% ifequal page 'map' %} class="active"{% endifequal %}><a href="{% url 'map' %}">Map</a></li>
+            <li{% ifequal page 'about' %} class="active"{% endifequal %}><a href="{% url 'about' %}">About</a></li>
+            <li{% ifequal page 'contact' %} class="active"{% endifequal %}><a href="{% url 'contact' %}">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li{% ifequal page 'credits' %} class="active"{% endifequal %}><a href="{% url 'credits' %}">Credits</a></li>
+                <li{% ifequal page 'serverinfo' %} class="active"{% endifequal %}><a href="{% url 'serverinfo' %}">Server Info</a></li>
+                <li{% ifequal page 'stats' %} class="active"{% endifequal %}><a href="{% url 'stats' %}">Statistics</a></li>
+
+                <li class="divider"></li>
+                <li class="dropdown-header">API</li>
+                <li><a href="{% url 'points_users' %}">User Points JSON</a></li>
+                <li><a href="{% url 'points_twitter' %}">Twitter Points JSON</a></li>
+
+              </ul>
+            </li>
+          </ul>
+
+
+<ul class="dropdown-menu">
+        <li><a href="index.php?page=info"><span class="glyphicon glyphicon-info-sign"></span> Server Info</a></li>
+                    <!-- Estas opciones solo puden hacerlas los usuarios con rol de admin -->
+          <li><a href="index.php?page=backup"><span class="glyphicon glyphicon-floppy-disk"></span> Backup</a></li>
+                <li class="divider"></li>
+        <li class="dropdown-header">API</li>
+        <li><a href="index.php?page=insert_question_demo">Suggest question</a></li>
+        <li><a href="index.php?page=insert_correction_demo">Suggest correction</a></li>
+
+                    <!-- Estas opciones solo puden hacerlas los usuarios con rol de admin -->
+          <li class="dropdown-header">Export</li>
+          <li><a href="export/export_csv.php" target="_blank">Export as CSV</a></li>
+          <li><a href="export/export_java.php" target="_blank">Export as Java</a></li>
+          <li><a href="export/export_js.php" target="_blank">Export as JavaScript</a></li>
+                <li class="divider"></li>
+        <li><a href="index.php?page=statistics"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+        </ul>
+
+
+          <!-- login -->
+          {% block toggle_login %}
+            {% include "login.html" %}
+          {% endblock %}
+          <!-- end login -->
+
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer navbar-inverse">
+      <div class="container">
+        <p class="text-muted">&copy; Evita Controles 2015</p>
+      </div>
+    </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+
+        <script src="/static/js/vendor/bootstrap.min.js"></script>
+
+        <script src="/static/js/main.js"></script>
+
+
+        {% block js_include %}
+        {% endblock %}
+
+    </body>
+</html>

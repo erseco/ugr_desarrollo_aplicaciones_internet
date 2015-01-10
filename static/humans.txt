@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Ernesto Serrano <erseco@correo.ugr.es>
+    Jesus Gonzalez 	<jesusgonzaleznovez@gmail.com>
+
+# THANKS
+
+    Sergio Alonso 	<zerjioi@ugr.es>
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    jQuery, Modernizr

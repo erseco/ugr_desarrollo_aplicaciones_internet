@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Esta página muestra la información de python extraida (similar a phpinfo();)
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}
+Server Info
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Server Info</h2>
+  {{ server_info|safe }}
+</div>
+{% endblock %}

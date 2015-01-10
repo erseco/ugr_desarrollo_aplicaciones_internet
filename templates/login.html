@@ -1,0 +1,40 @@
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Muestra el fomulario de inicio de sesión o el menú del usuario
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+{% if user.is_authenticated %}
+<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a class="dropdown-toggle" id="dropuser" data-toggle="dropdown"
+            href="#"><span class="glyphicon glyphicon-user"></span> Welcome, {{ user.username }}  <b class="caret"></b></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropuser">
+            <li><a href="{% url 'userpoint_list' %}">User points <span class="glyphicon glyphicon-map-marker pull-right"></span></a></li>
+            <li><a href="{% url 'category_list' %}">Categories <span class="glyphicon glyphicon-list pull-right"></span></a></li>
+            <li><a href="{% url 'mysite_logout' %}"> Logout <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+        </ul>
+    </li>
+</ul>
+{% else %}
+<form class="navbar-form navbar-right" action="{% url "mysite_login" %}"
+        method="post" accept-charset="utf-8">
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Username" name="username">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" placeholder="Password" name="password">
+    </div>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-default">Login</button>
+    <a href="{% url 'registration' %}">sign up</a>
+</form>
+{% endif %}

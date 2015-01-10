@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Esta página muestra el formulario de registro de nuevo usuario
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}
+Create an account
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+<h1>Create an account</h1>
+<div class="col-sm-8 contact-form">
+  <form id="contact" method="post" class="form" role="form">
+  {% csrf_token %}
+{% for field in form %}
+<fieldset class="control-group">
+    <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+    <div class="controls">
+        {{ field }}
+        <p class="help-text">{{ field.help_text }} </p>
+    </div>
+</fieldset>
+{% endfor %}
+  <button class="btn btn-primary" type="submit" value="Create the account">Register</button>
+
+  </form>
+  </div>
+  </div>
+{% endblock %}
+
+

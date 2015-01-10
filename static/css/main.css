@@ -1,0 +1,128 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.footer {
+   position:fixed;
+   bottom:0px;
+   height:30px;
+   width:100%;
+}
+
+.container .text-muted {
+	margin: 10px 0;
+}
+
+
+/* ==========================================================================
+   Map styles
+   ========================================================================== */
+.jumbotron{
+    background-image: url("../img/streets.png");
+    background-size: cover;
+    background-repeat:no-repeat;
+}
+
+/* Cuadro de filtrado de tablas */
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+}
+.clickable {
+    cursor: pointer;
+}
+
+.panel-heading div {
+    margin-top: -18px;
+    font-size: 15px;
+}
+.panel-heading div span{
+    margin-left:5px;
+}
+.panel-body {
+    display: none;
+}
+
+.panel-primary>.panel-heading {
+color: #fff;
+background-color: #428bca;
+border-color: #428bca;
+}
+
+
+/* ==========================================================================
+   Server Info styles
+   ========================================================================== */
+#server-info pre {
+	margin:0px;
+	font-family:monospace
+}
+#server-info a:link {
+	color:#009;
+	text-decoration:none;
+	background-color:#fff
+}
+#server-info a:hover {
+	text-decoration:underline
+}
+#server-info table {
+	border-collapse:collapse
+}
+#server-info .center {
+	text-align:center
+}
+#server-info .center table {
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left
+}
+#server-info .center th {
+	text-align:center !important
+}
+#server-info td,th {
+	border:1px solid #999999;
+	font-size:75%;
+	vertical-align:baseline
+}
+#server-info h1 {
+	font-size:150%
+}
+#server-info h2 {
+	font-size:125%
+}
+#server-info .p {
+	text-align:left
+}
+#server-info .e {
+	width:30%;
+	background-color:#ffffcc;
+	font-weight:bold;
+	color:#000
+}
+#server-info .h {
+	background:url('http://python.org/images/header-bg2.png') repeat-x;
+	font-weight:bold;
+	color:#000
+}
+#server-info .v {
+	background-color:#f2f2f2;
+	color:#000
+}
+#server-info .vr {
+	background-color:#cccccc;
+	text-align:right;
+	color:#000
+}
+#server-info img {
+	float:right;
+	border:0px;
+}
+#server-info hr {
+	width:600px;
+	background-color:#ccc;
+	border:0px;
+	height:1px;
+	color: #000
+}

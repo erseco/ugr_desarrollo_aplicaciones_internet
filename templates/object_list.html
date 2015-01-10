@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Esta página muestra una lista de elementos del modelo suministrado y permite
+agregar, eliminar y modificar (CRUD)
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}{{object_name}} List{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<h1>{{object_name}}</h1>
+
+<div class="table-responsive">
+	<div class="panel-heading">
+	    <h3 class="panel-title">
+	        <a href="{% url insert_url %}">
+	            <i class="glyphicon glyphicon-plus"></i> Add {{object_name}}
+	        </a>
+	    </h3>
+	</div>
+
+
+	<table class="table table-hover table-bordered tablesorter resizable">
+		<thead>
+			<tr>
+				<th>{{object_name}}</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		  {% for obj in object_list %}
+		  <tr>
+			<td>{{obj}}</td>
+		  	<td><a href="{{obj.get_update_url}}">Update</a> | <a href="{{obj.get_delete_url}}">Delete</a></td>
+		  </tr>
+		  {% endfor %}
+		</tbody>
+	</table>
+</div>
+</div>
+
+{% endblock %}

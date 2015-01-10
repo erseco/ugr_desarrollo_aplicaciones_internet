@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Esta página muestra los formularios con estilo bootstrap
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}{{object_name}} Form{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<h1>{{object_name}}</h1>
+
+<h3>{% if object %}Updating {{object}}{% else %}Add a new {{object_name}}{% endif %}</h3>
+<form action="" method="post">
+
+{% csrf_token %}
+
+{% for field in form %}
+<fieldset class="control-group">
+    <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+    <div class="controls">
+        {{ field }}
+        <p class="help-text">{{ field.help_text }} </p>
+    </div>
+</fieldset>
+{% endfor %}
+<button class="btn btn-primary" type="submit">Save {{object_name}}</button>
+
+</div>
+{% endblock %}

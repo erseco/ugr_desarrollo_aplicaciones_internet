@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% comment %}
+--------------------------------------------------------------------------------
+DAI - Desarrollo de Aplicaciones para Internet
+Grado en Ingeniería Informática (UGR)
+
+Proyecto Final: Evita Controles
+
+2015 - Ernesto Serrano <erseco@correo.ugr.es>
+--------------------------------------------------------------------------------
+
+Pagina de contacto
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Contact</h2>
+<div class="row">
+<div class="col-sm-4">
+
+<h3>Ask a question or send a suggestion, our team will answer in less than 24 hours.</h3>
+<hr>
+  <address>
+    <strong>Email:</strong> <a href="mailto:erseco@correo.ugr.es"> erseco@correo.ugr.es</a><br><br>
+  </address>
+</div>
+
+<div class="col-sm-8 contact-form">
+ {% if sendok %}
+
+ <h2>Datos recibidos correctamente</h2>
+
+{% else %}
+
+
+  <form id="contact" method="post" class="form" role="form">
+{% csrf_token %}
+
+{% for field in form %}
+<fieldset class="control-group">
+    <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+    <div class="controls">
+        {{ field }}
+        <p class="help-text">{{ field.help_text }} </p>
+    </div>
+</fieldset>
+{% endfor %}
+<button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+
+{% endif %}
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
