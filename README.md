@@ -7,12 +7,12 @@ Consiste en un website que geoposiciona en un mapa los controles policiales repo
 
 Este proyecto está realizado como prueba de las siguientes tecnologías:
 
-*) Django 1.7.1
-*) Twitter Bootstrap 3.3.1
-*) Twitter API (tweepy)
-*) Hightcharts
-*) Google Maps
-*) JSON
+* Django 1.7.1
+* Twitter Bootstrap 3.3.1
+* Twitter API (tweepy)
+* Hightcharts
+* Google Maps
+* JSON
 
 
 
