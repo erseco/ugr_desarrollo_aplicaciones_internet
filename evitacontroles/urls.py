@@ -19,7 +19,7 @@ from django.conf.urls import patterns, include, url
 
 from .views import HomePageView, \
     MapView, AboutView, ContactView, StatsView, \
-    CreditsView, ServerInfoView, RegistrationView, PoinstTwitterView, \
+    CreditsView, ServerInfoView, RegistrationView, \
     UserPointList, NewUserPoint, ViewUserPoint, EditUserPoint, DeleteUserPoint, \
     GetTwitterPointsJson, GetUserPointsJson
 
@@ -71,9 +71,6 @@ userpoint_urls = patterns('',
 )
 
 urlpatterns += patterns('',
-    # url(r'^$', PeopleList.as_view(), name='people_list'),
-    # url(r'^(?P<slug>[\w-]+).person/', include(person_urls)),
-    # url(r'^NewPerson$', NewPerson.as_view(), name='person_add'),
     url(r'^categories$', CategoryList.as_view(), name='category_list'),
     url(r'^category/new$', NewCategory.as_view(), name='category_insert'),
     url(r'^category/(?P<pk>[\w-]+)/', include(category_urls)),

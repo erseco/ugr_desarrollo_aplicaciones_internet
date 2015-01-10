@@ -161,38 +161,6 @@ class StatsView(FormView):
         }
         return self.render_to_response(context)
 
-
-class PoinstTwitterView(TemplateView):
-    template_name = 'points_twitter.json'
-
-    def get(self, request, *args, **kwargs):
-        context = {
-            'points': twitter.get_twits_both(['reyes']),
-        }
-
-
-        print context['points']
-
-
-        return self.render_to_response(context)
-
-
-
-
-# class UserPointsView(FormView):
-#     template_name = 'userpoints.html'
-
-#     def get(self, request, *args, **kwargs):
-#         context = {
-#             'page': 'userpoints',
-#             'some_dynamic_value': 'This text comes from django view!',
-#         }
-#         return self.render_to_response(context)
-
-
-
-
-
 # Vistas de las categorías
 
 class CategoryMixin(object):
@@ -226,13 +194,6 @@ class EditCategory(CategoryFormMixin, UpdateView):
 
 class DeleteCategory(CategoryMixin, DeleteView):
     template_name = 'object_confirm_delete.html'
-
-# class ViewCategory(CategoryMixin, ListView):
-#     template_name = 'object_list.html'
-#     def get_queryset(self):
-#         self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
-#         return super(ViewCategory, self).get_queryset().filter(category=self.category)
-
 
 # Vistas de los UserPoint
 
@@ -280,48 +241,13 @@ class MapView(UserPointFormMixin, CreateView):
 
 
 # Vistas para obtener los JSON de los puntos
-
-
 class GetTwitterPointsJson(TemplateView):
-
     def get(self, request, *args, **kwargs):
-        #points = twitter.get_twits_both(['reyes'])
-
-
-        #points = serializers.serialize("json", points)
-
-
         dump = twitter.get_twits_with_geo('#evitacontrol')
-
-        # print points
-
-
-        # if not points:
-        #     points = ""
-
-
-
-        # dump = json.dumps(points)
-
         return HttpResponse(dump)
-        # return HttpResponse(dump, mimetype='application/json')
 
 
 class GetUserPointsJson(TemplateView):
-
     def get(self, request, *args, **kwargs):
         points = serializers.serialize("json", UserPoint.objects.all())
-
-        # for e in UserPoint.objects.all():
-        #     print(e.headline)
-
-        # print points
-
-        # for p in points:
-        #     print p.id
-
-        # points = ['hola', 'adios']
-        #dump = json.dumps(points)
-
         return HttpResponse(points)
-        # return HttpResponse(dump, mimetype='application/json')
