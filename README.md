@@ -38,3 +38,7 @@ Una vez hecho esto habrá que sincronizar la base de datos mediante:
 
 Y ejecutar el servidor de pruebas:
 `python manage.py runserver`
+
+
+---
+Si quieres contactar conmigo: http://www.ernesto.es
