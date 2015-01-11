@@ -47,16 +47,16 @@ Server Info
             x: -20 //center
         },
         subtitle: {
-            text: 'Evitacontroles',
+            text: '(Agosto 2014 - Enero 2015)',
             x: -20
         },
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: ['Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'Enero']
         },
         yAxis: {
-            title: {
-                text: 'Numero de controles 2015'
+			min: 0,            
+			title: {
+                text: 'Numero de controles'
             },
             plotLines: [{
                 value: 0,
@@ -72,10 +72,10 @@ Server Info
         },
         series: [{
            name: 'Avisados por usuarios registrados',
-           data: [0,0,0,0,0,0,0,0,0,0,0,0]
+           data: [10,8,12,17,13,0]
        }, {
            name: 'Avisados por usuarios de Twitter',
-           data: [0,0,0,0,0,0,0,0,0,0,0,0]
+           data: [8,4,12,3,11,0]
         }]
      };
 
@@ -85,20 +85,18 @@ Server Info
             type: 'column'
         },
         title: {
-            text: 'Total de controles'
+            text: 'Controles avisados por mes'
         },
         subtitle: {
-            text: 'Evitacontroles'
+            text: '(Agosto 2014 - Enero 2015)'
         },
         xAxis: {
-            categories: [
-                'Controles'
-            ]
+            categories: ['Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'Enero']
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'Total de avisos'
+                text: 'Numero de controles'
             }
         },
         tooltip: {
@@ -115,14 +113,12 @@ Server Info
                 borderWidth: 0
             }
         },
-        series: [{
-            name: 'Avisados por usuarios registrados',
-            data: []
-
-        }, {
-            name: 'Avisados por usuarios de Twitter',
-            data: []
-
+       series: [{
+           name: 'Avisados por usuarios registrados',
+           data: [10,8,12,17,13,0]
+       }, {
+           name: 'Avisados por usuarios de Twitter',
+           data: [8,4,12,3,11,0]
         }]
     };
 
@@ -130,9 +126,13 @@ Server Info
 
         val1 = [];
         $.each(json1, function(key,value1) {
-            			if(parseFloat(value1.fields.date.split("-",2)[1]) == 1){
+            if(parseFloat(value1.fields.date.split("-",2)[1]) == 1){
+				options.series[0].data[5] = options.series[0].data[5] + 1; 
+			}
+/*           if(parseFloat(value1.fields.date.split("-",2)[1]) == 1){
 				options.series[0].data[0] = options.series[0].data[0] + 1; 
 			}
+			
 			if(parseFloat(value1.fields.date.split("-",2)[1]) == 2){
 				options.series[0].data[1] = options.series[0].data[1] + 1; 
 			}
@@ -166,7 +166,7 @@ Server Info
 			if(parseFloat(value1.fields.date.split("-",2)[1]) == 12){
 				options.series[0].data[11] = options.series[0].data[11] + 1; 
 			}	
-
+*/
         });
 
 
@@ -174,12 +174,15 @@ Server Info
         $.each(json1, function(key,value1) {
             val1.push(parseFloat(value1.fields.date.split("-",2)[1]));
         });
-        options2.series[0].data = [val1.length];
+        options2.series[0].data[5] = val1.length;
 
      });
      $.getJSON("{% url 'points_twitter' %}", function(json2) {
         $.each(json2, function(key,value2) {
-if(parseFloat(value2.fields.date.split("-",2)[1]) == 1){
+			if(parseFloat(value2.fields.date.split("-",2)[1]) == 1){
+				options.series[1].data[5] = options.series[1].data[5] + 1; 
+			}
+		/*	if(parseFloat(value2.fields.date.split("-",2)[1]) == 1){
 				options.series[1].data[0] = options.series[1].data[0] + 1; 
 			}
 			if(parseFloat(value2.fields.date.split("-",2)[1]) == 2){
@@ -214,7 +217,8 @@ if(parseFloat(value2.fields.date.split("-",2)[1]) == 1){
 			}	
 			if(parseFloat(value2.fields.date.split("-",2)[1]) == 12){
 				options.series[1].data[11] = options.series[1].data[11] + 1; 
-			}        
+			}
+		*/        
 		});
         chart = new Highcharts.Chart(options);
 
@@ -222,7 +226,7 @@ if(parseFloat(value2.fields.date.split("-",2)[1]) == 1){
         $.each(json2, function(key,value2) {
             val2.push(parseFloat(value2.fields.date.split("-",2)[1]));
         });
-        options2.series[1].data = [val2.length];
+        options2.series[1].data[5] = val2.length;
         chart = new Highcharts.Chart(options2);
      });
 
