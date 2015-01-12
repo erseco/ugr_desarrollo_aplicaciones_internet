@@ -1,0 +1,24 @@
+$def with (form)
+<html>
+<head>
+<title>Ejercicio 4</title>
+</head>
+<body>
+    <!-- Formulario de login  -->
+    <form class="navbar-form navbar-right" role="form" method="get" action="login">
+        <div class="form-group">
+          <input name="email" type="text" placeholder="e-mail" class="form-control">
+        </div>
+        <div class="form-group">
+          <input name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+    <button type="submit" class="btn btn-success">Sign in</button>
+    </form>
+
+    <hr>
+    <!-- formualario de registro -->
+	<form name="main" method="post">
+		$if not form.valid: <p class="error">ERROR: Intentalo de nuevo</p>
+		$:form.render()
+	</form>
+</body>

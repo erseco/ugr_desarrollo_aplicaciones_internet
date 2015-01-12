@@ -1,0 +1,16 @@
+$def with (nombre)
+
+<html>
+  <head>
+    <title>Mi primera plantilla Templetor</title>
+  </head>
+  
+  <body>
+    <p><em>Hola 
+      $if nombre:
+        $nombre
+      $else:
+        mundo!
+    </em></p>
+  </body>
+</html>

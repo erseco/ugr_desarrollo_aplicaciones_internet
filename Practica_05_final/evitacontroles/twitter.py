@@ -17,6 +17,7 @@ Esta clase obtiene información de twitter
 import tweepy
 import time
 import json
+
 # Consumer keys and access tokens, used for OAuth
 # consumer_key = "X0J539IFVSaYatPfyVCFMILkc"
 # consumer_secret = "uHGp3DcaTN7lA2ARVQ3s1Q51BYmGcPsp74rE5SLixpiggJjLVQ"

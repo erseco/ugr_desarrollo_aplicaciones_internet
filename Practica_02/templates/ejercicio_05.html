@@ -1,0 +1,25 @@
+$def with (form)
+<html>
+<head>
+<title>Ejercicio 5</title>
+<!-- Cargamos la libreria de jQuery desde el CDN oficial -->
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="./static/farbtastic.js"></script>
+<link rel="stylesheet" href="./static/farbtastic.css" type="text/css" />
+
+</head>
+<body>
+	<form name="main" method="post">
+		$if not form.valid: <p class="error">ERROR: Intentalo de nuevo</p>
+		$:form.render()
+		<div id="colorpicker1"></div>
+		<div id="colorpicker2"></div>
+		<input type="submit" />
+	</form>
+<script type="text/javascript">
+  \$(document).ready(function() {
+    \$('#colorpicker1').farbtastic('#color1');
+    \$('#colorpicker2').farbtastic('#color2');
+  });
+</script>
+</body>

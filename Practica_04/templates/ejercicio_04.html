@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="${author}">
+
+    <title>DAI</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="./static/bootstrap/css/shop-item.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">${site_name}</a>
+              </div>
+
+
+
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                % if logged_in == True:
+
+                    <!-- Esta logueado -->
+                    <div class="navbar-right">
+                        <span class="navbar-text">Bienvenido <a href="view">${user}</a> (<a href="logout">logout</a>)</span>
+                    </div>
+
+                % else:
+                    <!-- Formulario de login  -->
+                    <form class="navbar-form navbar-right" role="form" method="get" action="login">
+                        <div class="form-group">
+                          <input name="email" type="text" placeholder="e-mail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <input name="password" type="password" placeholder="password" class="form-control">
+                        </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                    <a href="register">Registrarse</a>
+                    </form>
+
+                % endif
+
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">${subtitle}</p>
+                <div class="list-group">
+                    <a href="index?page=index" class="list-group-item active">Indice</a>
+                    <a href="index?page=1" class="list-group-item">Enlace 1</a>
+                    <a href="index?page=2" class="list-group-item">Enlace 2</a>
+                    <a href="index?page=3" class="list-group-item">Enlace 3</a>
+                    <a href="pocket" class="list-group-item">Bolsillo</a>
+                    <a href="map" class="list-group-item">Mapa</a>
+                    <a href="twitter" class="list-group-item">Twitter</a>
+
+                </div>
+                <a class="twitter-share-button"
+                href="https://twitter.com/share">
+              Tweet
+              </a>
+              <script type="text/javascript">
+              window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+              </script>
+
+
+            </div>
+            <div class="col-md-9">
+
+                % if page == 'index':
+
+                    <h1>Bienvenido al ejercicio 4bis</h1>
+
+                    <ul>
+                    % for prompt in items:
+                      <li><a href="${prompt.link}">${prompt.title}</a></li>
+                    % endfor
+                    </ul>
+
+
+                % elif page == 'register':
+
+                    <h1>Registrarse</h1>
+
+                    % if not form.valid:
+                        <p class="error">ERROR: Intentalo de nuevo</p>
+
+                    % endif
+                    <!-- formualario de registro -->
+                    <form name="main" method="post">
+                        ${form.render()}
+                    </form>
+
+                % elif page == 'registered':
+
+                    <h1>Correcto!</h1>
+                    <p>El senyor ${firstname} ${lastname} se ha registrado correctamente</p>
+                    <p>Inicie sesión introduciendo sus datos en el formulario superior</p>
+
+                % elif page == 'view':
+
+                    <h1>Datos del usuario ${user}</h1>
+                    <p>${values}</p>
+                    <a href="edit">Modificar</a>
+
+                % elif page == 'pocket':
+
+                    <h1>Datos de control de bolsillo</h1>
+                    <h2>Gráfica</h2>
+                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    <div id="sliders">
+                        <table>
+                            <tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="45" value="15"/> <span id="R0-value" class="value"></span></td></tr>
+                            <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="45" value="15"/> <span id="R1-value" class="value"></span></td></tr>
+                        </table>
+                    </div>
+
+                    <h2>Introducir datos</h2>
+                    <form action="save" method="get" accept-charset="utf-8">
+
+                        <input type="number" name="amount" />
+                        <input type="submit" name="save" />
+                        <input type="button" name="clear" value="borrar" />
+                    </form>
+
+                %elif page == 'map':
+                    <h1>Mapa de extraterrestres encontrados en la luna</h1>
+                    <div id="map-canvas" style="height: 400px;"></div>
+
+                %elif page == 'twitter':
+                    <h1>Ultimos tweets con el hastag ${hashtag}:</h1>
+                    <ul>
+                    % for tweet in tweets:
+                      <li>${tweet.source_url}">${tweet.text} <strong>(${tweet.author.name})</strong></li>
+                    % endfor
+                    </ul>
+
+                % else:
+
+                <h1>Pagina ${page}</h1>
+
+                % endif
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>&copy; ${license} - ${author}</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="./static/bootstrap/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+
+## Cargamos las librerías JS de HighCharts solo si estamos en la página pocket
+% if page == 'pocket':
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./static/highcharts/highcharts.js"></script>
+    <script src="./static/highcharts/highcharts-3d.js"></script>
+    <script src="./static/highcharts/exporting.js"></script>
+    <script type="text/javascript" charset="utf-8" async defer>
+
+    var chart;
+
+
+    function loadData()
+    {
+        $.getJSON( "read", function( data ) {
+            // Le ponemos los datos json cargados en las series
+            chart.series[0].setData(data[0]);
+        });
+    }
+
+        $(function () {
+
+    // Set up the chart
+    chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'container',
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        title: {
+            text: 'Variacion de dinero'
+        },
+        subtitle: {
+            text: 'Cambia las vista 3D moviendo los deslizadores de abajo'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+
+        yAxis: {
+            title: {
+                text: 'Evolucion de mi bolsillo'
+            },
+
+            opposite: true
+        },
+
+        // Los datos se los cargaremos mas tarde mediante ajax
+        series: [{
+            data: []
+        }],
+
+
+    });
+
+    loadData();
+
+    function showValues() {
+        $('#R0-value').html(chart.options.chart.options3d.alpha);
+        $('#R1-value').html(chart.options.chart.options3d.beta);
+    }
+
+    // Activate the sliders
+    $('#R0').on('change', function () {
+        chart.options.chart.options3d.alpha = this.value;
+        showValues();
+        chart.redraw(false);
+    });
+    $('#R1').on('change', function () {
+        chart.options.chart.options3d.beta = this.value;
+        showValues();
+        chart.redraw(false);
+    });
+
+    showValues();
+});
+
+
+    $("input[name='save']").click(function(e) {
+      e.preventDefault();
+      var amount = $("input[name='amount']").val();
+
+      var dataString = 'amount='+amount;
+      $.ajax({
+        type:'GET',
+        data:dataString,
+        url:'save',
+        success:function(data) {
+          loadData();
+        }
+      });
+    });
+
+    $("input[name='clear']").click(function(e) {
+      e.preventDefault();
+
+      $.get('clear');
+        loadData();
+
+    });
+
+
+        </script>
+
+## Cargamos las librerías JS de HighCharts solo si estamos en la página pocket
+% elif page == 'map':
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+
+var moonTypeOptions = {
+  getTileUrl: function(coord, zoom) {
+      var normalizedCoord = getNormalizedCoord(coord, zoom);
+      if (!normalizedCoord) {
+        return null;
+      }
+      var bound = Math.pow(2, zoom);
+      return 'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/clem_bw' +
+          '/' + zoom + '/' + normalizedCoord.x + '/' +
+          (bound - normalizedCoord.y - 1) + '.jpg';
+  },
+  tileSize: new google.maps.Size(256, 256),
+  maxZoom: 8,
+  minZoom: 0,
+  radius: 1738000,
+  name: 'Moon'
+};
+
+var moonMapType = new google.maps.ImageMapType(moonTypeOptions);
+
+function initialize() {
+  var myLatlng = new google.maps.LatLng(0, 0);
+  var mapOptions = {
+    center: myLatlng,
+    zoom: 1,
+    streetViewControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['moon']
+    }
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+  map.mapTypes.set('moon', moonMapType);
+  map.setMapTypeId('moon');
+
+
+  // ALF
+
+  var contentStringAlf = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">ALF</h1>'+
+      '<div id="bodyContent">'+
+      '<p>El personaje del título es Gordon Shumway, un extraterrestre apodado A.L.F “Alien Life Form”, del inglés «Forma de vida Extraterrestre»). Nació el 28 de octubre de 1756, en la región Lower East del planeta Melmac, que a su vez estaba localizado 6 pársecs más allá del supercúmulo Hydra-Centaurus, tenía cielo verde, pasto azul y agua naranja.</p>'+
+      '<p>ALF: <a href="http://es.wikipedia.org/wiki/ALF" target="_blank">'+
+      'https://es.wikipedia.org/wiki/ALF'+
+      '</a>.</p>'+
+      '</div>'+
+      '</div>';
+  var infowindow1 = new google.maps.InfoWindow({
+      content: contentStringAlf
+  });
+
+
+var markerAlf = new google.maps.Marker(
+    {
+        position: {lat: -10, lng: 30},
+        map: map,
+        title:"Hello World!",
+        draggable:true,
+        animation: google.maps.Animation.DROP,
+        color: 'green',
+        //black, brown, green, purple, yellow, blue, gray, orange, red, white
+    }
+);
+
+  google.maps.event.addListener(markerAlf, 'click', function() {
+    infowindow1.open(map,markerAlf);
+  });
+
+
+// XENOMORFO
+
+  var contentStringXeno = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Xenomorfo</h1>'+
+      '<div id="bodyContent">'+
+      '<p>El Alien o Xenomorfo es un ente biológico extraterrestre parasitoide ficticio, antagonista de la tetralogía fílmica de la serie Alien, con apariciones en precuelas, y secuelas en cómics y videojuegos además de los crossover Alien vs. Depredador</p>'+
+      '<p>Xenomorfo: <a href="http://es.wikipedia.org/wiki/Xenomorfo"  target="_blank">'+
+      'https://es.wikipedia.org/wiki/Xenomorfo'+
+      '</a>.</p>'+
+      '</div>'+
+      '</div>';
+
+  var infowindow2 = new google.maps.InfoWindow({
+      content: contentStringXeno
+  });
+
+
+
+var markerXeno = new google.maps.Marker(
+    {
+        position: myLatlng,
+        map: map,
+        title:"Hello World!",
+        draggable:true,
+        animation: google.maps.Animation.DROP,
+        color: 'green',
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        //black, brown, green, purple, yellow, blue, gray, orange, red, white
+    }
+);
+
+  google.maps.event.addListener(markerXeno, 'click', function() {
+    infowindow2.open(map,markerXeno);
+  });
+google.maps.event.addListener(markerXeno, 'click', toggleBounce);
+
+function toggleBounce()
+{
+  if (markerXeno.getAnimation() != null) {
+    markerXeno.setAnimation(null);
+  } else {
+    markerXeno.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+
+}
+
+// Normalizes the coords that tiles repeat across the x axis (horizontally)
+// like the standard Google map tiles.
+function getNormalizedCoord(coord, zoom) {
+  var y = coord.y;
+  var x = coord.x;
+
+  // tile range in one direction range is dependent on zoom level
+  // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+  var tileRange = 1 << zoom;
+
+  // don't repeat across y-axis (vertically)
+  if (y < 0 || y >= tileRange) {
+    return null;
+  }
+
+  // repeat across x-axis
+  if (x < 0 || x >= tileRange) {
+    x = (x % tileRange + tileRange) % tileRange;
+  }
+
+  return {
+    x: x,
+    y: y
+  };
+
+
+
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+
+% endif
+
+</body>
+
+</html>

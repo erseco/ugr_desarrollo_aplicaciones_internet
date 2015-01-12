@@ -1,0 +1,12 @@
+$def with (form)
+<html>
+<head>
+<title>Ejercicio 4</title>
+</head>
+<body>
+	<form name="main" method="post">
+		$if not form.valid: <p class="error">ERROR: Intentalo de nuevo</p>
+		$:form.render()
+		<input type="submit" />
+	</form>
+</body>

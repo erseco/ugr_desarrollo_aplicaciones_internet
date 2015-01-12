@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="${author}">
+
+    <title>DAI</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="./static/bootstrap/css/shop-item.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">${site_name}</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                % if logged_in == True:
+
+                    <!-- Esta logueado -->
+                    <div class="navbar-right">
+                        <span class="navbar-text">Bienvenido <a href="view">${user}</a> (<a href="logout">logout</a>)</span>
+                    </div>
+
+                % else:
+                    <!-- Formulario de login  -->
+                    <form class="navbar-form navbar-right" role="form" method="get" action="login">
+                        <div class="form-group">
+                          <input name="email" type="text" placeholder="e-mail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <input name="password" type="password" placeholder="password" class="form-control">
+                        </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                    <a href="register">Registrarse</a>
+                    </form>
+
+                % endif
+
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">${subtitle}</p>
+                <div class="list-group">
+                    <a href="index?page=index" class="list-group-item active">Indice</a>
+                    <a href="index?page=1" class="list-group-item">Enlace 1</a>
+                    <a href="index?page=2" class="list-group-item">Enlace 2</a>
+                    <a href="index?page=3" class="list-group-item">Enlace 3</a>
+                </div>
+
+
+            </div>
+            <div class="col-md-9">
+
+                % if page == 'index':
+
+                    <h1>Bienvenido al ejercicio 4bis</h1>
+
+                % elif page == 'register':
+
+                    <h1>Registrarse</h1>
+
+                    % if not form.valid:
+                        <p class="error">ERROR: Intentalo de nuevo</p>
+
+                    % endif
+                    <!-- formualario de registro -->
+                    <form name="main" method="post">
+                        ${form.render()}
+                    </form>
+
+                % elif page == 'registered':
+
+                    <h1>Correcto!</h1>
+                    <p>El senyor ${firstname} ${lastname} se ha registrado correctamente</p>
+                    <p>Inicie sesión introduciendo sus datos en el formulario superior</p>
+
+                % elif page == 'view':
+
+                    <h1>Datos del usuario ${user}</h1>
+                    <p>${values}</p>
+                    <a href="edit">Modificar</a>
+
+                % else:
+
+                <h1>Pagina ${page}</h1>
+
+                % endif
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>&copy; ${license} - ${author}</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="./static/bootstrap/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
