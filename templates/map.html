@@ -43,7 +43,7 @@ Map
 
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
    <script type="text/javascript">
-  function leer_json(){
+  function leer_json_users(){
   $.getJSON("{% url 'points_users' %}", function(json1) {
           $.each(json1, function(key, data) {
             var infowindow = new google.maps.InfoWindow;
@@ -65,6 +65,8 @@ Map
           i = i + 1;
           });
         });
+  }
+  function leer_json_twitter(){
     $.getJSON("{% url 'points_twitter' %}", function(json1) {
           $.each(json1, function(key, data) {
             var infowindow = new google.maps.InfoWindow;
@@ -87,19 +89,25 @@ Map
           });
         });
   }
+
+  // Primera lectura
+  leer_json_twitter();
+  leer_json_users();
+
    </script>
    <script type="text/javascript">
       var map;
       function initialize()
       {
         var mapOptions = {
-          center: new google.maps.LatLng(40.1198087, -6.6124474),
+          center: new google.maps.LatLng(38.4100432,-3.5610259),
           zoom: 7,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-        setInterval("leer_json();", 3000);
+        setInterval("leer_json_twitter();", 60000);
+        setInterval("leer_json_users();", 3000);
 
       {% if user.is_authenticated %}
       // Esta tabla es la del popup de guardar
