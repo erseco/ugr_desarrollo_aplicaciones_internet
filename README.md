@@ -17,4 +17,6 @@ Se compone de las siguientes prácticas:
 
 5) Práctica final (django): Evita Controles
 
-http://ddsi.ernesto.es/
+
+---
+Si quieres contactar conmigo: http://www.ernesto.es
