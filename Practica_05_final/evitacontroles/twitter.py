@@ -19,15 +19,10 @@ import time
 import json
 
 # Consumer keys and access tokens, used for OAuth
-# consumer_key = "X0J539IFVSaYatPfyVCFMILkc"
-# consumer_secret = "uHGp3DcaTN7lA2ARVQ3s1Q51BYmGcPsp74rE5SLixpiggJjLVQ"
-# access_token = "2964281927-N4NZzREUubmuVPsrjnEbtyaXylRBbDvzV7IBdUp"
-# access_token_secret = "J3ovNywWwmqvWKCDRsAlUSM1LSjtDW7V90ya4yc4nOcS4"
-
-consumer_key = "AL5MJELgEzz3fEA7RE500PxPv"
-consumer_secret = "ZSnGbMFY9Th2bw9s3qTL7YlE91YLH4RpCzECxuodJwnG7dsIvM"
-access_token = "2964281927-G4ibTUp1MG0dbqLsQmNo2tWDaac4IC2EHmI8gWO"
-access_token_secret = "PLo3w7xmWu7EluNFqZwt2GGVHOY6WMAuGPcdMH8IaOozJ"
+consumer_key = "_PUT_YOUR_DATA_HERE_"
+consumer_secret = "_PUT_YOUR_DATA_HERE_"
+access_token = "_PUT_YOUR_DATA_HERE_"
+access_token_secret = "_PUT_YOUR_DATA_HERE_"
 
 
 
