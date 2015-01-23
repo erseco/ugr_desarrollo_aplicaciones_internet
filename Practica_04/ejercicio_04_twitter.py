@@ -206,10 +206,10 @@ class twitter:
         hashtag = "ugr"
 
         # Consumer keys and access tokens, used for OAuth
-        consumer_key = "kRWNwtgrWwXQPxak88bx86tv5"
-        consumer_secret = "8rTKm71fvjqowllRB7h85GJvrMtw0SnT39P2rq48yZtciai1Lv"
-        access_token = "15438494-ZrMOaNfqH3q6R4egvoz8v197AdCZE6NyzVUr6coJn"
-        access_token_secret = "pYQF8k9UmeTTGsbtHYO6bGVnlZgmndFMBToISClKWRg2U"
+        consumer_key = "_PUT_YOUR_DATA_HERE_"
+        consumer_secret = "_PUT_YOUR_DATA_HERE_"
+        access_token = "_PUT_YOUR_DATA_HERE_"
+        access_token_secret = "_PUT_YOUR_DATA_HERE_"
         # OAuth process, using the keys and tokens
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
