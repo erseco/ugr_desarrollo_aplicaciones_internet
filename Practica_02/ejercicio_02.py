@@ -39,7 +39,7 @@ class hola:
         	<head>
 	        	<title>Ejercicio 2</title>
 	        	<link href="./static/style.css" rel="stylesheet" type="text/css" />
-        	</head
+        	</head>
         	<body>
         		<h1>Bienvenidos</h2>
         		<img src="./static/black.jpg" />
